@@ -4,7 +4,7 @@ import pro.sky.exception.Model.Employee;
 
 import java.util.Set;
 
-public interface EmployeeService {
+public interface EmployeeCollectionService {
 
     Employee addEmployee (String firstName, String lastName);
 
@@ -12,4 +12,5 @@ public interface EmployeeService {
 
     Employee findEmployee (String firstName, String lastName);
 
+    Set<Employee>getAllEmployees();
 }
