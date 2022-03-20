@@ -1,11 +1,13 @@
 package pro.sky.exception.Service;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.exception.Model.Employee;
 import pro.sky.exception.exceptions.EmployeeExistsException;
 import pro.sky.exception.exceptions.EmployeeNotFoundException;
 
+import javax.naming.InvalidNameException;
 import java.util.*;
 
 @Service
@@ -16,6 +18,7 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
     @Override
     public Employee addEmployee(String firstName, String lastName) {
+        validateNames(firstName, lastName);
 
         Employee addingEmployee = new Employee(firstName,lastName);
 
@@ -28,6 +31,15 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
         employees.put(key, addingEmployee);
         return addingEmployee;
+
+    }
+
+    private void validateNames(String... names){
+        Arrays.stream(names).forEach(name->{
+            if (!StringUtils.isAlpha(name)) {
+                throw new InvalidNameException();
+            }
+        });
 
     }
 

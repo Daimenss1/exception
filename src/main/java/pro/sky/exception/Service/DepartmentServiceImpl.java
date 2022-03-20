@@ -21,7 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return employeeService.getAllEmployees().stream().filter(e-> e.getDepartmentId()==departmentId).
                 max(Comparator.comparingInt(e-> e.getSalary()))
                 .orElseThrow(()-> new EmployeeNotFoundException("This Employee has been already added!"));
-                //.orElseThrow(EmployeeNotFoundException::new);
+
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return employeeService.getAllEmployees().stream().filter(e-> e.getDepartmentId()==departmentId).
                 min(Comparator.comparingInt(Employee::getSalary))
                 .orElseThrow(()-> new EmployeeNotFoundException("This Employee has been already added!"));
-        // .orElseThrow(EmployeeNotFoundException::new);
+
     }
 
     @Override
@@ -48,7 +48,6 @@ public class DepartmentServiceImpl implements DepartmentService {
                    departmentEmployees.add(e);
                     result.put(e.getDepartmentId(),departmentEmployees);
                 });
-        //return employeeService.getAllEmployees().stream().collect(Collectors.groupingBy(Employee::getDepartmentId));
         return result;
     }
 }
