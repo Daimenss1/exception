@@ -1,7 +1,6 @@
 package pro.sky.exception.Service;
 
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.exception.Model.Employee;
 import pro.sky.exception.exceptions.EmployeeExistsException;
@@ -9,6 +8,9 @@ import pro.sky.exception.exceptions.EmployeeNotFoundException;
 
 import javax.naming.InvalidNameException;
 import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.capitalize;
+import static org.apache.commons.lang3.StringUtils.isAlpha;
 
 @Service
 public class EmployeeServiceMapImpl implements EmployeeMapService {
@@ -20,9 +22,9 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
     public Employee addEmployee(String firstName, String lastName) {
         validateNames(firstName, lastName);
 
-        Employee addingEmployee = new Employee(firstName,lastName);
+        String key = getKey(firstName, lastName);
 
-        String key = firstName + lastName;
+        Employee addingEmployee = new Employee(key.split("-")[0],key.split("-")[1]);
 
         if (employees.containsKey(key)) {
             throw new EmployeeExistsException("This Employee has been already added!");
@@ -34,10 +36,23 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
     }
 
+    private String getKey(String firstName, String lastName) {
+
+        String correctedFirstName = capitalize(firstName.toLowerCase());
+        String correctedLastName = capitalize(lastName.toLowerCase());
+
+        return  correctedFirstName + "_" + correctedLastName;
+
+    }
+
     private void validateNames(String... names){
         Arrays.stream(names).forEach(name->{
-            if (!StringUtils.isAlpha(name)) {
-                throw new InvalidNameException();
+            if (!isAlpha(name)) {
+                try {
+                    throw new InvalidNameException("Invalid name!");
+                } catch (InvalidNameException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -45,7 +60,10 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
-        String key = firstName + lastName;
+        validateNames(firstName, lastName);
+
+        String key = getKey(firstName, lastName);
+
         if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundException(" This employee cant found");
         }
@@ -54,7 +72,10 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
-        String key = firstName + lastName;
+        validateNames(firstName, lastName);
+
+        String key = getKey(firstName, lastName);
+
         if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundException(" This employee cant found");
         }
