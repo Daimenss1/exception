@@ -48,11 +48,8 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
     private void validateNames(String... names){
         Arrays.stream(names).forEach(name->{
             if (!isAlpha(name)) {
-                try {
-                    throw new InvalidNameException("Invalid name!");
-                } catch (InvalidNameException e) {
-                    e.printStackTrace();
-                }
+                throw new InvalidNameException("Invalid name!");
+
             }
         });
 
