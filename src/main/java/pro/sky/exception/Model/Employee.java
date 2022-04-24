@@ -18,6 +18,9 @@ public class Employee {
         this.lastName = lastName;
     }
 
+    public Employee(String firstName, String lastName, int maxSalary, int departmentId) {
+    }
+
     public String getFirstName() {
         return firstName;
     }
