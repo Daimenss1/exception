@@ -24,7 +24,7 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
         String key = getKey(firstName, lastName);
 
-        Employee addingEmployee = new Employee(key.split("-")[0],key.split("-")[1]);
+        Employee addingEmployee = new Employee(key.split("_")[0],key.split("_")[1]);
 
         if (employees.containsKey(key)) {
             throw new EmployeeExistsException("This Employee has been already added!");
@@ -48,8 +48,13 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
     private void validateNames(String... names){
         Arrays.stream(names).forEach(name->{
             if (!isAlpha(name)) {
+                try {
                     throw new InvalidNameException("Invalid name!");
+                } catch (InvalidNameException e) {
+                    throw new RuntimeException(e);
+                }
             }
+
         });
 
     }
