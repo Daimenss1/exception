@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class EmployeeServiceCollectionmpl implements EmployeeCollectionService {
+public class EmployeeServiceCollectionImpl implements EmployeeCollectionService {
 
    private Set<Employee> employees = new HashSet<>();
 

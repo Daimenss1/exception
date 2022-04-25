@@ -7,7 +7,7 @@ import pro.sky.exception.exceptions.EmployeeExistsException;
 import pro.sky.exception.exceptions.EmployeeNotFoundException;
 
 @Service
-public class EmployeeServicempl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService {
 
     private final Employee [] employees = new Employee[2];
     private int size;

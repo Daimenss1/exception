@@ -1,6 +1,7 @@
 package pro.sky.exception.Service;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.exception.Model.Employee;
 import pro.sky.exception.exceptions.EmployeeExistsException;
@@ -24,7 +25,7 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
         String key = getKey(firstName, lastName);
 
-        Employee addingEmployee = new Employee(key.split("_")[0],key.split("_")[1]);
+        Employee addingEmployee = new Employee(key.split("_")[0], key.split("_")[1]);
 
         if (employees.containsKey(key)) {
             throw new EmployeeExistsException("This Employee has been already added!");
@@ -41,23 +42,17 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
         String correctedFirstName = capitalize(firstName.toLowerCase());
         String correctedLastName = capitalize(lastName.toLowerCase());
 
-        return  correctedFirstName + "_" + correctedLastName;
+        return correctedFirstName + "_" + correctedLastName;
 
     }
 
     private void validateNames(String... names){
-        Arrays.stream(names).forEach(name->{
-            if (!isAlpha(name)) {
-                try {
-                    throw new InvalidNameException("Invalid name!");
-                } catch (InvalidNameException e) {
-                    throw new RuntimeException(e);
-                }
+        Arrays.stream(names).forEach(name-> {
+            if (!StringUtils.isAlpha(name)) {
+                throw new InvalidNameException("Invalid name!");
             }
-
         });
-
-    }
+}
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
@@ -88,4 +83,5 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
         return Collections.unmodifiableCollection(employees.values());
     }
 }
+
 
