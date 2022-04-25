@@ -9,7 +9,7 @@ import pro.sky.exception.Model.Employee;
 import pro.sky.exception.Service.EmployeeServiceMapImpl;
 import pro.sky.exception.exceptions.EmployeeExistsException;
 import pro.sky.exception.exceptions.EmployeeNotFoundException;
-import pro.sky.exception.exceptions.InvalidNameException;
+import pro.sky.exception.exceptions.InvalidNabException;
 import pro.sky.exception.exceptions.ZeroDividerException;
 
 import java.util.Collection;
@@ -49,7 +49,7 @@ public class EmployeeServiceImplTest {
     @MethodSource("provideArgumentsForWrongNameEmployeeTests")
     @ParameterizedTest
     public void shouldThrowInvalidNameExceptionWhenNameIsIncorrect(String firstName, String lastName) {
-        assertThrows(InvalidNameException.class, () -> out.addEmployee(firstName, lastName));
+        assertThrows(InvalidNabException.class, () -> out.addEmployee(firstName, lastName));
     }
 
     @Test

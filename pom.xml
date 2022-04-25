@@ -21,7 +21,6 @@
 			<version>5.8.2</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
@@ -37,12 +36,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>5.3.18</version>
+			<version>5.3.19</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot</artifactId>
-			<version>2.6.6</version>
+			<version>2.6.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -64,30 +63,34 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>4.4.0</version>
+			<version>4.5.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>4.4.0</version>
-			<scope>test</scope>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.12.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>31.1-jre</version>
+			</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
-			<version>2.6.6</version>
+			<version>2.6.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.6.6</version>
+			<version>2.6.7</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-test</artifactId>
-			<version>2.6.6</version>
+			<version>2.6.7</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -1,13 +1,14 @@
 package pro.sky.exception.Service;
 
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.exception.Model.Employee;
 import pro.sky.exception.exceptions.EmployeeExistsException;
 import pro.sky.exception.exceptions.EmployeeNotFoundException;
+import pro.sky.exception.exceptions.InvalidNabException;
 
 import javax.naming.InvalidNameException;
+import javax.naming.NamingException;
 import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.capitalize;
@@ -17,6 +18,7 @@ import static org.apache.commons.lang3.StringUtils.isAlpha;
 public class EmployeeServiceMapImpl implements EmployeeMapService {
 
     private final Map<String, Employee> employees = new HashMap<>();
+
 
 
     @Override
@@ -37,6 +39,14 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
 
     }
 
+    private void validateNames(String... names) {
+        Arrays.stream(names).forEach(name -> {
+            if (!isAlpha(name)) {
+                throw new InvalidNabException("Invalid name");
+            }
+        });
+    }
+
     private String getKey(String firstName, String lastName) {
 
         String correctedFirstName = capitalize(firstName.toLowerCase());
@@ -45,14 +55,6 @@ public class EmployeeServiceMapImpl implements EmployeeMapService {
         return correctedFirstName + "_" + correctedLastName;
 
     }
-
-    private void validateNames(String... names){
-        Arrays.stream(names).forEach(name-> {
-            if (!StringUtils.isAlpha(name)) {
-                throw new InvalidNameException("Invalid name!");
-            }
-        });
-}
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
